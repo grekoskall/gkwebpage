@@ -101,7 +101,7 @@ const EditNoteForm = ({ note, names }) => {
   const content = (
     <>
       <p className={errClass}>{errContent}</p>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={(e) => e.preventDefault()} className="mb-4">
         <div className="flex flex-row place-content-center mb-4">
           <h2 className="text-center text-3xl text-purple-900">Edit Note: </h2>
           <div className="text-right pt-1">

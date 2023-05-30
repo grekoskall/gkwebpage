@@ -53,7 +53,7 @@ const NewNoteForm = ({ names }) => {
     <>
       <p className={errClass}>{error?.data?.message}</p>
 
-      <form onSubmit={onSaveNoteClicked}>
+      <form onSubmit={onSaveNoteClicked} className="mb-4">
         <div className="flex flex-row place-content-center mb-4">
           <h2 className="text-center text-3xl text-purple-900">New Note</h2>
           <div className="text-right pt-1">
