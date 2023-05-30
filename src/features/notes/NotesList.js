@@ -36,7 +36,7 @@ const NotesList = () => {
         const table = ids?.length && filteredIds.map(noteId => <Note key={noteId} noteId={noteId} />)
 
         content = (
-            <table>
+            <table className='table-auto text-center min-w-full mb-4 mt-8 text-xl'>
                 <thead>
                     <tr>
                         <th scope="col">Created</th>

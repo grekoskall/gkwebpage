@@ -26,7 +26,7 @@ const Note = ({noteId}) => {
                 <td>{note.name}</td>
 
                 <td>
-                    <button onClick={change}>
+                    <button onClick={change} className="hover:text-purple-600">
                         <FontAwesomeIcon icon={faPenToSquare} />
                     </button>
                 </td>

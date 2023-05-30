@@ -31,7 +31,7 @@ const NamesList = () => {
         const table = ids?.length && ids.map(nameId => <Name key={nameId} nameId={nameId} />)
 
         content = (
-            <table>
+            <table className='table-auto text-center min-w-full mb-4 mt-8 text-xl'>
                 <thead>
                     <tr>
                         <th scope="col">Name</th>

@@ -5,13 +5,13 @@ import DashFooter from './DashFooter'
 
 const DashBoard = () => {
   return (
-    <>
+    <div className='flex flex-col min-h-screen'>
         <DashHeader />
         <div>
             <Outlet />
         </div>
         <DashFooter />
-    </>
+    </div>
   )
 }
 

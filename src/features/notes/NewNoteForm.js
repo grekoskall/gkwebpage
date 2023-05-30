@@ -1,114 +1,115 @@
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { useAddNewNoteMutation } from "./notesApiSlice"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSave } from "@fortawesome/free-solid-svg-icons"
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAddNewNoteMutation } from "./notesApiSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
 
 const NewNoteForm = ({ names }) => {
-    const [addNewNote, {
-        isLoading, isSuccess, isError, error
-    }] = useAddNewNoteMutation()
+  const [addNewNote, { isLoading, isSuccess, isError, error }] =
+    useAddNewNoteMutation();
 
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const [title, setTitle] = useState('')
-    const [text, setText] = useState('')
-    const [nameId, setNameId] = useState(names[0].id)
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [nameId, setNameId] = useState(names[0].id);
 
-    useEffect(() => {
-        if (isSuccess) {
-            setTitle('')
-            setText('')
-            setNameId('')
-            navigate('/dashboard/notes')
-        }
-    }, [isSuccess, navigate])
-
-    // Handlers
-    const handleTitleChange = e => setTitle(e.target.value)
-    const handleTextChange = e => setText(e.target.value)
-    const handleNameIdChange = e => setNameId(e.target.value)
-
-    const canSave = [title, text, nameId].every(Boolean) && !isLoading
-    const onSaveNoteClicked = async (e) => {
-        e.preventDefault()
-        if (canSave) {
-            await addNewNote({ name: nameId, title, text })
-        }
+  useEffect(() => {
+    if (isSuccess) {
+      setTitle("");
+      setText("");
+      setNameId("");
+      navigate("/dashboard/notes");
     }
+  }, [isSuccess, navigate]);
 
-    const options = names.map(name => {
-        return (
-            <option
-                key={name.id}
-                value={name.id}
+  // Handlers
+  const handleTitleChange = (e) => setTitle(e.target.value);
+  const handleTextChange = (e) => setText(e.target.value);
+  const handleNameIdChange = (e) => setNameId(e.target.value);
+
+  const canSave = [title, text, nameId].every(Boolean) && !isLoading;
+  const onSaveNoteClicked = async (e) => {
+    e.preventDefault();
+    if (canSave) {
+      await addNewNote({ name: nameId, title, text });
+    }
+  };
+
+  const options = names.map((name) => {
+    return (
+      <option key={name.id} value={name.id}>
+        {name.name}
+      </option>
+    );
+  });
+
+  // Validation Classes
+  const errClass = isError ? "errmsg" : "offscreen";
+  const validTitleClass = !title ? "invalid" : "";
+  const validTextClass = !text ? "invalid" : "";
+
+  const content = (
+    <>
+      <p className={errClass}>{error?.data?.message}</p>
+
+      <form onSubmit={onSaveNoteClicked}>
+        <div className="flex flex-row place-content-center mb-4">
+          <h2 className="text-center text-3xl text-purple-900">New Note</h2>
+          <div className="text-right pt-1">
+            <button
+              className={`ml-4 mr-4 text-2xl ${
+                canSave ? "hover:text-green-700" : ""
+              }`}
+              title="Save"
+              disabled={!canSave}
             >
-                {name.name}
-            </option>
-        )
-    })
+              <FontAwesomeIcon icon={faSave} />
+            </button>
+          </div>
+        </div>
 
-    // Validation Classes
-    const errClass = isError ? "errmsg" : "offscreen"
-    const validTitleClass = !title ? "invalid" : ''
-    const validTextClass = !text ? "invalid" : ''
+        <div className="flex flex-col">
+          <label className="text-xl mt-2" htmlFor="title">
+            Title:
+          </label>
+          <input
+            className={`${validTitleClass} border-gray-400 border-2`}
+            id="title"
+            name="title"
+            autoComplete="off"
+            value={title}
+            onChange={handleTitleChange}
+          />
 
-    const content = (
-        <>
-            <p className={errClass}>{error?.data?.message}</p>
+          <label className="text-xl mt-4" htmlFor="text">
+            Text:
+          </label>
+          <textarea
+            className={`${validTextClass} border-gray-400 border-2`}
+            id="text"
+            name="text"
+            value={text}
+            onChange={handleTextChange}
+          />
 
-            <form onSubmit={onSaveNoteClicked}>
-                <div>
-                    <h2>New Note</h2>
-                    <div>
-                        <button
-                            title="Save"
-                            disabled={!canSave}
-                        >
-                            <FontAwesomeIcon icon={faSave} />
-                        </button>
-                    </div>
-                </div>
+          <label className="text-xl mt-4" htmlFor="name">
+            Assigned To:
+          </label>
+          <select
+            className="border-gray-400 border-2"
+            id="name"
+            name="name"
+            value={nameId}
+            onChange={handleNameIdChange}
+          >
+            {options}
+          </select>
+        </div>
+      </form>
+    </>
+  );
+  return content;
+};
 
-                <label htmlFor="title">
-                    Title:
-                </label>
-                <input
-                    className={`${validTitleClass}`}
-                    id="title"
-                    name="title"
-                    autoComplete="off"
-                    value={title}
-                    onChange={handleTitleChange}
-                />
-
-                <label htmlFor="text">
-                    Text:
-                </label>
-                <textarea 
-                    className={`${validTextClass}`}
-                    id="text"
-                    name="text"
-                    value={text}
-                    onChange={handleTextChange}
-                />
-        
-                <label htmlFor="name">
-                    Assigned To:
-                </label>
-                <select
-                    id="name"
-                    name="name"
-                    value={nameId}
-                    onChange={handleNameIdChange}
-                >
-                    {options}
-                </select>
-
-            </form>
-        </>
-    )
-    return content
-}
-
-export default NewNoteForm
+export default NewNoteForm;

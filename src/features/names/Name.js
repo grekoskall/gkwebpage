@@ -27,7 +27,7 @@ const Name = ({nameId}) => {
                 <td className={`${status}`}>{name.name}</td>
                 <td className={`${status}`}>{roles}</td>
                 {(isAdmin) && <td className={`${status}`}>
-                    <button onClick={change}>
+                    <button onClick={change} className="hover:text-purple-600">
                         <FontAwesomeIcon icon={faPenToSquare} />
                     </button>
                 </td>}
