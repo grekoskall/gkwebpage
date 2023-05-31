@@ -2,6 +2,7 @@ import React from 'react'
 import { useGetNotesQuery } from './notesApiSlice'
 import Note from './Note'
 import useAuth from '../../hooks/useAuth'
+import style from '../../config/tailwindClasses'
 
 const NotesList = () => {
     const { name, isAdmin, isVip } = useAuth()
@@ -37,7 +38,7 @@ const NotesList = () => {
 
         content = (
             <table className='table-auto text-center min-w-full mb-4 mt-8 text-xl'>
-                <thead>
+                <thead className={`${style.accentTextDark}`}>
                     <tr>
                         <th scope="col">Created</th>
                         <th scope="col">Updated</th>
@@ -46,7 +47,7 @@ const NotesList = () => {
                         <th scope="col">Change</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className={`${style.plainTextDark}`}>
                     {table}
                 </tbody>
             </table>

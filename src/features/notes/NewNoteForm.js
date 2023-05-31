@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAddNewNoteMutation } from "./notesApiSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
+import style from "../../config/tailwindClasses";
 
 const NewNoteForm = ({ names }) => {
   const [addNewNote, { isLoading, isSuccess, isError, error }] =
@@ -55,8 +56,8 @@ const NewNoteForm = ({ names }) => {
 
       <form onSubmit={onSaveNoteClicked} className="mb-4">
         <div className="flex flex-row place-content-center mb-4">
-          <h2 className="text-center text-3xl text-purple-900">New Note</h2>
-          <div className="text-right pt-1">
+          <h2 className={`text-center text-3xl ${style.insideAccent} ${style.insideAccentDark}`}>New Note</h2>
+          <div className={`text-right pt-1 ${style.plainTextDark}`}>
             <button
               className={`ml-4 mr-4 text-2xl ${
                 canSave ? "hover:text-green-700" : ""
@@ -69,7 +70,7 @@ const NewNoteForm = ({ names }) => {
           </div>
         </div>
 
-        <div className="flex flex-col">
+        <div className={`flex flex-col ${style.plainTextDark}`}>
           <label className="text-xl mt-2" htmlFor="title">
             Title:
           </label>
@@ -97,7 +98,7 @@ const NewNoteForm = ({ names }) => {
             Assigned To:
           </label>
           <select
-            className="border-gray-400 border-2"
+            className="border-gray-400 border-2 dark:text-black"
             id="name"
             name="name"
             value={nameId}

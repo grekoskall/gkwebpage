@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { ROLES } from "../../config/roles";
 import useAuth from "../../hooks/useAuth";
+import style from "../../config/tailwindClasses";
 
 const NAME = /^[A-z]{3,20}$/;
 const PWD = /^[A-z0-9!@#$%]{4,12}$/;
@@ -103,10 +104,10 @@ const EditNameForm = ({ name }) => {
 
       <form onSubmit={(e) => e.preventDefault()} className="mb-4">
         <div className="flex flex-row place-content-center mb-4">
-          <h2 className="text-center text-3xl text-purple-900">
+          <h2 className={`text-center text-3xl ${style.insideAccent} ${style.insideAccentDark}`}>
             Change Persona
           </h2>
-          <div className="text-right pt-1">
+          <div className={`text-right pt-1 ${style.plainTextDark}`}>
             <button
               className={`ml-4 mr-4 text-2xl ${
                 canSave ? "hover:text-green-700" : ""
@@ -127,12 +128,12 @@ const EditNameForm = ({ name }) => {
           </div>
         </div>
 
-        <div className="flex flex-col">
+        <div className={`flex flex-col ${style.plainTextDark}`}>
           <label className="mt-2 text-xl" htmlFor="name">
             Name: <span className="text-lg text-gray-500">[3-20 letters]</span>
           </label>
           <input
-            className={`${validNameClass}`}
+            className={`${validNameClass} `}
             id="name"
             name="name"
             type="text"
@@ -146,7 +147,7 @@ const EditNameForm = ({ name }) => {
             <span className="text-lg text-gray-500">[Empty = no change]</span>
           </label>
           <input
-            className={`${validPwdClass}`}
+            className={`${validPwdClass} `}
             id="password"
             name="password"
             type="password"
@@ -170,7 +171,7 @@ const EditNameForm = ({ name }) => {
           <select
             id="roles"
             name="roles"
-            className={`${validRolesClass}`}
+            className={`${validRolesClass} dark:text-black`}
             multiple={true}
             size="3"
             value={roles}

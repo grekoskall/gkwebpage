@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { ROLES } from "../../config/roles";
 import useAuth from "../../hooks/useAuth";
+import style from "../../config/tailwindClasses";
 
 const NAME = /^[A-z]{3,20}$/;
 const PWD = /^[A-z0-9!@#$%]{4,12}$/;
@@ -86,8 +87,8 @@ const NewNameForm = () => {
 
       <form onSubmit={onSaveNameClicked} className="mb-4">
         <div className="flex flex-row place-content-center mb-4">
-          <h2 className="text-center text-3xl text-purple-900">New Name</h2>
-          <div className="text-right pt-1">
+          <h2 className={`text-center text-3xl ${style.insideAccent} ${style.insideAccentDark}`}>New Name</h2>
+          <div className={`text-right pt-1 ${style.plainTextDark}`}>
             <button
               title="Save"
               className={`ml-4 mr-4 text-2xl ${
@@ -99,7 +100,7 @@ const NewNameForm = () => {
             </button>
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className={`flex flex-col ${style.plainTextDark}`}>
           <label className="text-xl mt-4" htmlFor="name">
             Name: <span className="text-lg text-gray-500">[3-20 letters]</span>
           </label>
@@ -129,7 +130,7 @@ const NewNameForm = () => {
           <select
             id="roles"
             name="roles"
-            className={`${validRolesClass}`}
+            className={`${validRolesClass} dark:text-black`}
             multiple={true}
             size="3"
             value={roles}

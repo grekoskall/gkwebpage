@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../hooks/useAuth";
+import style from "../../config/tailwindClasses";
 
 const EditNoteForm = ({ note, names }) => {
   const { isAdmin, isVip } = useAuth();
@@ -103,8 +104,8 @@ const EditNoteForm = ({ note, names }) => {
       <p className={errClass}>{errContent}</p>
       <form onSubmit={(e) => e.preventDefault()} className="mb-4">
         <div className="flex flex-row place-content-center mb-4">
-          <h2 className="text-center text-3xl text-purple-900">Edit Note: </h2>
-          <div className="text-right pt-1">
+          <h2 className={`text-center text-3xl ${style.insideAccent} ${style.insideAccentDark}`}>Edit Note: </h2>
+          <div className={`text-right pt-1 ${style.plainTextDark}`}>
             <button
               className={`ml-4 mr-4 text-2xl ${
                 canSave ? "hover:text-green-700" : ""
@@ -121,7 +122,7 @@ const EditNoteForm = ({ note, names }) => {
 
         <div className="grid grid-cols-4 gap-4">
           <div className="col-start-1 col-span-4 text-center">
-            <label className="text-xl" htmlFor="title">
+            <label className={`text-xl ${style.plainTextDark}`} htmlFor="title">
               Title:{" "}
             </label>
             <input
@@ -139,7 +140,7 @@ const EditNoteForm = ({ note, names }) => {
 
           <div className="col-start-2 col-span-2 text-center">
             <div className="flex flex-col">
-              <lable className="text-xl" htmlFor="text">
+              <lable className={`text-xl ${style.plainTextDark}`} htmlFor="text">
                 Text:
               </lable>
               <textarea
@@ -155,7 +156,7 @@ const EditNoteForm = ({ note, names }) => {
 
           <div className="col-start-auto col-span-1 ml-4">
             <div className="text-center mb-4">
-              <label className="whitespace-nowrap text-xl" htmlFor="name">
+              <label className={`text-xl ${style.plainTextDark} whitespace-nowrap`} htmlFor="name">
                 Assigned To:
               </label>
               <select
@@ -167,18 +168,18 @@ const EditNoteForm = ({ note, names }) => {
                 {options}
               </select>
             </div>
-            <div className="mb-2">
+            <div className={`${style.plainTextDark} mb-2`}>
               <p>
                 Created:
                 <br />
-                <span className="text-sm text-gray-600">{created}</span>
-              </p>
+                <span className={`text-sm ${style.date} ${style.dateDark}`}>{created}</span>
+              </p> 
             </div>
-            <div>
+            <div className={`${style.plainTextDark}`}>
               <p>
                 Updated:
                 <br />
-                <span className="text-sm text-gray-600">{updated}</span>
+                <span className={`text-sm ${style.date} ${style.dateDark}`}>{updated}</span>
               </p>
             </div>
           </div>

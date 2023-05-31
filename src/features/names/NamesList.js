@@ -1,6 +1,7 @@
 import React from 'react'
 import { useGetNamesQuery } from './namesApiSlice'
 import Name from './Name'
+import style from '../../config/tailwindClasses'
 import useAuth from '../../hooks/useAuth'
 
 const NamesList = () => {
@@ -32,14 +33,14 @@ const NamesList = () => {
 
         content = (
             <table className='table-auto text-center min-w-full mb-4 mt-8 text-xl'>
-                <thead>
+                <thead className={`${style.accentTextDark}`}>
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Roles</th>
                         {(isAdmin) && <th scope="col">Change</th>}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className={`${style.plainTextDark}`}>
                     {table}
                 </tbody>
             </table>

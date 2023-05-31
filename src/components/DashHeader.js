@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
 import useAuth from "../hooks/useAuth";
+import style from "../config/tailwindClasses";
 
 const DASH = /^\/dashboard(\/)?$/;
 const NOTES = /^\/dashboard\/notes(\/)?$/;
@@ -108,13 +109,13 @@ const DashHeader = () => {
       <p className={errClass}>{error?.data?.message}</p>
       <header>
         <div className={`${dashClass} mt-4   pt-4`}>
-          <h1 className="dark:text-white text-3xl font-bold text-center p-6  text-blue-900 first-letter:text-4xl underline">
+          <h1 className={`${style.headerClass} ${style.headerClassDark} underline `}>
             <Link to="/dashboard" className="hover:text-blue-500">
               <FontAwesomeIcon icon={faHomeLg} className="mr-1"/>
               PersonaNotes
             </Link>
           </h1>
-          <nav className="flex flex-row gap-4 text-3xl justify-end text-blue-900">
+          <nav className={`flex flex-row gap-4 text-3xl justify-end ${style.navBtn} ${style.navBtnDark}`}>
             {buttonContent}
           </nav>
         </div>
